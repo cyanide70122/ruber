@@ -1,0 +1,26 @@
+<div class = "w-full min-h-[100vh] bg-cyan-500 flex flex-col items-center pt-36">
+  <h1 class="font-bold text-4xl">Ruber</h1>
+  <p class = "text-lg mt-2">A ride starting app buit with Ruby on Rails and Hotwire.</p>
+  
+  <% if current_customer  || current_driver %>
+    <% if current_customer %>
+      <% if current_customer.active_ride%>
+        <p class = "text-4xl"> Your ride to <%= current_customer.active_ride.dropoff_location %> is scheduled.</p>
+      <% else%>
+        <%= link_to "New Ride", new_ride_path, class: "rounded-full bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"%>
+      <% end %>
+    <% else%>
+      <% if current_driver.active_ride%>
+        <p class = "text-4xl"> Your driving <%= current_driver.active_ride.customer_email %> to <%= current_driver.active_ride.dropoff_location %></p>
+      <% else %>
+        <%= link_to "View Available Rides", available_rides_path, class: "rounded-full bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"%>
+      <% end %>
+    <% end %>
+  <% else%>
+    <div class = "flex items-center gap-5 mt-5">
+      <%= link_to "Sign up as Customer", new_customer_registration_path, class: 'rounded-full bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'%>
+      <%= link_to "Sign up as Driver", new_driver_registration_path, class: 'rounded-full bg-gradient-to-tr from-green-800 to-yellow-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'%>
+    </div>
+  <% end %>
+  
+</div>
